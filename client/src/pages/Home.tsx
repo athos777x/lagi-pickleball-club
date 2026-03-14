@@ -1,10 +1,23 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { ArrowRight, Users, Trophy, Zap, Clock, Award, Star, ChevronRight, Mail } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function Home() {
   const [email, setEmail] = useState("");
+  const heroTitleRef = useRef<HTMLHeadingElement>(null);
+  const heroParagraphRef = useRef<HTMLParagraphElement>(null);
+  const programsHeadingRef = useRef<HTMLHeadingElement>(null);
+  const programCardsRef = useRef<HTMLDivElement>(null);
+  const membershipsHeadingRef = useRef<HTMLHeadingElement>(null);
+  const membershipCardsRef = useRef<HTMLDivElement>(null);
+  const courtsHeadingRef = useRef<HTMLHeadingElement>(null);
+  const statsRef = useRef<HTMLDivElement>(null);
+  const testimonialsRef = useRef<HTMLDivElement>(null);
 
   // Image URLs from generated assets
   const heroImage = "https://d2xsxph8kpxj0f.cloudfront.net/310519663438044642/GEwFLYvqwVqyzSVFw4kpxn/hero-action-shot-E8SaUTSst2A2EZrFnsN76e.webp";
@@ -12,6 +25,156 @@ export default function Home() {
   const courtsImage = "https://d2xsxph8kpxj0f.cloudfront.net/310519663438044642/GEwFLYvqwVqyzSVFw4kpxn/courts-facility-meRtRuoFefbX4b3MMwqxwX.webp";
   const membershipImage = "https://d2xsxph8kpxj0f.cloudfront.net/310519663438044642/GEwFLYvqwVqyzSVFw4kpxn/membership-benefits-T3Cv425F5hBuUqfMQbhWVD.webp";
   const logoUrl = "https://d2xsxph8kpxj0f.cloudfront.net/310519663438044642/GEwFLYvqwVqyzSVFw4kpxn/lagi-logo_9f20cfc9.jpg";
+
+  // GSAP Animations
+  useEffect(() => {
+    // Hero title animation
+    if (heroTitleRef.current) {
+      gsap.set(heroTitleRef.current, { opacity: 0, y: 30 });
+      gsap.to(heroTitleRef.current, {
+        opacity: 1,
+        y: 0,
+        duration: 1,
+        ease: "power3.out",
+      });
+    }
+
+    // Hero paragraph fade in
+    if (heroParagraphRef.current) {
+      gsap.set(heroParagraphRef.current, { opacity: 0, y: 20 });
+      gsap.to(heroParagraphRef.current, {
+        opacity: 1,
+        y: 0,
+        duration: 1,
+        delay: 0.3,
+        ease: "power3.out",
+      });
+    }
+
+    // Programs section heading
+    if (programsHeadingRef.current) {
+      gsap.set(programsHeadingRef.current, { opacity: 0, x: -50 });
+      gsap.to(programsHeadingRef.current, {
+        scrollTrigger: {
+          trigger: programsHeadingRef.current,
+          start: "top 80%",
+          toggleActions: "play none none reverse",
+        },
+        opacity: 1,
+        x: 0,
+        duration: 0.8,
+        ease: "power3.out",
+      });
+    }
+
+    // Program cards staggered animation
+    if (programCardsRef.current) {
+      const cards = programCardsRef.current.querySelectorAll(".program-card");
+      gsap.set(cards, { opacity: 0, y: 30 });
+      gsap.to(cards, {
+        scrollTrigger: {
+          trigger: programCardsRef.current,
+          start: "top 80%",
+          toggleActions: "play none none reverse",
+        },
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        stagger: 0.15,
+        ease: "power3.out",
+      });
+    }
+
+    // Memberships section heading
+    if (membershipsHeadingRef.current) {
+      gsap.set(membershipsHeadingRef.current, { opacity: 0, y: 30 });
+      gsap.to(membershipsHeadingRef.current, {
+        scrollTrigger: {
+          trigger: membershipsHeadingRef.current,
+          start: "top 80%",
+          toggleActions: "play none none reverse",
+        },
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        ease: "power3.out",
+      });
+    }
+
+    // Membership cards scale animation
+    if (membershipCardsRef.current) {
+      const cards = membershipCardsRef.current.querySelectorAll(".membership-card");
+      gsap.set(cards, { opacity: 0, scale: 0.9 });
+      gsap.to(cards, {
+        scrollTrigger: {
+          trigger: membershipCardsRef.current,
+          start: "top 80%",
+          toggleActions: "play none none reverse",
+        },
+        opacity: 1,
+        scale: 1,
+        duration: 0.8,
+        stagger: 0.1,
+        ease: "back.out(1.5)",
+      });
+    }
+
+    // Courts section heading
+    if (courtsHeadingRef.current) {
+      gsap.set(courtsHeadingRef.current, { opacity: 0, x: 50 });
+      gsap.to(courtsHeadingRef.current, {
+        scrollTrigger: {
+          trigger: courtsHeadingRef.current,
+          start: "top 80%",
+          toggleActions: "play none none reverse",
+        },
+        opacity: 1,
+        x: 0,
+        duration: 0.8,
+        ease: "power3.out",
+      });
+    }
+
+    // Stats counter animation
+    if (statsRef.current) {
+      const statNumbers = statsRef.current.querySelectorAll(".stat-number");
+      gsap.set(statNumbers, { opacity: 0, y: 20 });
+      gsap.to(statNumbers, {
+        scrollTrigger: {
+          trigger: statsRef.current,
+          start: "top 80%",
+          toggleActions: "play none none reverse",
+        },
+        opacity: 1,
+        y: 0,
+        duration: 1,
+        stagger: 0.1,
+        ease: "power2.out",
+      });
+    }
+
+    // Testimonials fade in
+    if (testimonialsRef.current) {
+      const testimonialCards = testimonialsRef.current.querySelectorAll(".testimonial-card");
+      gsap.set(testimonialCards, { opacity: 0, y: 30 });
+      gsap.to(testimonialCards, {
+        scrollTrigger: {
+          trigger: testimonialsRef.current,
+          start: "top 80%",
+          toggleActions: "play none none reverse",
+        },
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        stagger: 0.15,
+        ease: "power3.out",
+      });
+    }
+
+    return () => {
+      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+    };
+  }, []);
 
   return (
     <div className="min-h-screen bg-background text-foreground overflow-hidden">
@@ -33,14 +196,14 @@ export default function Home() {
 
         <div className="container relative z-10 py-20">
           <div className="max-w-2xl">
-            <h1 className="text-5xl md:text-7xl font-bold font-poppins mb-6 leading-tight">
+            <h1 ref={heroTitleRef} className="text-5xl md:text-7xl font-bold font-poppins mb-6 leading-tight">
               Play Strong.
               <br />
               <span className="text-accent neon-glow">Serve Smart.</span>
               <br />
               Thrive Together.
             </h1>
-            <p className="text-lg md:text-xl text-foreground/80 mb-8 leading-relaxed">
+            <p ref={heroParagraphRef} className="text-lg md:text-xl text-foreground/80 mb-8 leading-relaxed">
               Join our pickleball community where players of all levels train, compete, and connect. Experience world-class facilities, expert coaching, and an energetic community.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
@@ -68,7 +231,7 @@ export default function Home() {
         <div className="container">
           <div className="grid lg:grid-cols-2 gap-12 items-center mb-16">
             <div>
-              <h2 className="text-4xl md:text-5xl font-bold font-poppins mb-6">
+              <h2 ref={programsHeadingRef} className="text-4xl md:text-5xl font-bold font-poppins mb-6">
                 Pickleball Programs
               </h2>
               <p className="text-lg text-foreground/70 mb-8">
@@ -82,7 +245,7 @@ export default function Home() {
             />
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div ref={programCardsRef} className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
               {
                 title: "Beginner Clinics",
@@ -109,7 +272,7 @@ export default function Home() {
               return (
                 <Card
                   key={idx}
-                  className="bg-card border-accent/20 hover:border-accent/50 p-6 transition-smooth group cursor-pointer hover:shadow-lg hover:shadow-accent/20"
+                  className="program-card bg-card border-accent/20 hover:border-accent/50 p-6 transition-smooth group cursor-pointer hover:shadow-lg hover:shadow-accent/20"
                 >
                   <Icon className="text-accent mb-4 group-hover:scale-110 transition-transform" size={28} />
                   <h3 className="text-lg font-semibold font-poppins mb-2">{program.title}</h3>
@@ -129,7 +292,7 @@ export default function Home() {
       <section id="memberships" className="py-20 bg-background border-t border-accent/20">
         <div className="container">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold font-poppins mb-4">
+            <h2 ref={membershipsHeadingRef} className="text-4xl md:text-5xl font-bold font-poppins mb-4">
               Choose Your Membership
             </h2>
             <p className="text-lg text-foreground/70">
@@ -137,7 +300,7 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div ref={membershipCardsRef} className="grid md:grid-cols-3 gap-8">
             {[
               {
                 name: "Starter",
@@ -180,7 +343,7 @@ export default function Home() {
             ].map((plan, idx) => (
               <Card
                 key={idx}
-                className={`p-8 transition-smooth ${
+                className={`membership-card p-8 transition-smooth ${
                   plan.highlight
                     ? "bg-gradient-to-b from-accent/10 to-card border-accent/50 ring-2 ring-accent/30 relative scale-105"
                     : "bg-card border-accent/20 hover:border-accent/50"
@@ -231,7 +394,7 @@ export default function Home() {
               className="rounded-xl overflow-hidden shadow-2xl order-2 lg:order-1"
             />
             <div className="order-1 lg:order-2">
-              <h2 className="text-4xl md:text-5xl font-bold font-poppins mb-6">
+              <h2 ref={courtsHeadingRef} className="text-4xl md:text-5xl font-bold font-poppins mb-6">
                 World-Class Pickleball Courts
               </h2>
               <p className="text-lg text-foreground/70 mb-8">
@@ -261,20 +424,20 @@ export default function Home() {
       </section>
 
       {/* Stats Section */}
-      <section className="py-20 bg-background border-t border-accent/20">
+      <section className="py-20 bg-background/50 border-t border-accent/20">
         <div className="container">
-          <div className="grid md:grid-cols-4 gap-8">
+          <div ref={statsRef} className="grid md:grid-cols-4 gap-8 text-center">
             {[
               { number: "500+", label: "Active Members" },
               { number: "8", label: "Professional Courts" },
               { number: "52", label: "Weekly Tournaments" },
               { number: "12", label: "Certified Coaches" },
             ].map((stat, idx) => (
-              <div key={idx} className="text-center">
-                <div className="text-4xl md:text-5xl font-bold font-poppins text-accent mb-2">
+              <div key={idx}>
+                <div className="stat-number text-5xl md:text-6xl font-bold text-accent mb-2">
                   {stat.number}
                 </div>
-                <div className="text-foreground/70">{stat.label}</div>
+                <p className="text-foreground/70">{stat.label}</p>
               </div>
             ))}
           </div>
@@ -282,9 +445,9 @@ export default function Home() {
       </section>
 
       {/* Testimonials Section */}
-      <section id="testimonials" className="py-20 bg-card/30 border-t border-accent/20">
-        <div className="container">
-          <h2 className="text-4xl md:text-5xl font-bold font-poppins mb-16 text-center">
+      <section className="py-20 bg-card/30 border-t border-accent/20">
+        <div ref={testimonialsRef} className="container">
+          <h2 className="text-4xl md:text-5xl font-bold font-poppins text-center mb-16">
             What Our Members Say
           </h2>
 
@@ -306,16 +469,13 @@ export default function Home() {
                 text: "Started as a complete beginner and now I'm playing regularly. The instructors are patient and knowledgeable.",
               },
             ].map((testimonial, idx) => (
-              <Card
-                key={idx}
-                className="bg-card border-accent/20 p-6 hover:border-accent/50 transition-smooth"
-              >
-                <div className="flex gap-1 mb-4">
+              <Card key={idx} className="testimonial-card bg-card/50 border-accent/20 p-6">
+                <div className="flex items-center gap-1 mb-4">
                   {[...Array(5)].map((_, i) => (
                     <Star key={i} size={16} className="fill-accent text-accent" />
                   ))}
                 </div>
-                <p className="text-foreground/80 mb-6 italic">"{testimonial.text}"</p>
+                <p className="text-foreground/80 mb-4 italic">&quot;{testimonial.text}&quot;</p>
                 <div>
                   <p className="font-semibold text-foreground">{testimonial.name}</p>
                   <p className="text-sm text-foreground/60">{testimonial.role}</p>
@@ -327,31 +487,21 @@ export default function Home() {
       </section>
 
       {/* Newsletter Section */}
-      <section className="py-20 bg-gradient-to-r from-card to-card/50 border-t border-accent/20">
-        <div className="container max-w-2xl">
-          <h2 className="text-3xl md:text-4xl font-bold font-poppins mb-4 text-center">
-            Stay Updated
-          </h2>
-          <p className="text-center text-foreground/70 mb-8">
+      <section className="py-20 bg-background border-t border-accent/20">
+        <div className="container max-w-2xl text-center">
+          <h2 className="text-4xl md:text-5xl font-bold font-poppins mb-6">Stay Updated</h2>
+          <p className="text-lg text-foreground/70 mb-8">
             Get the latest news, tournament schedules, and exclusive member offers
           </p>
-
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              setEmail("");
-            }}
-            className="flex gap-2 flex-col sm:flex-row"
-          >
+          <form className="flex flex-col sm:flex-row gap-3">
             <input
               type="email"
               placeholder="Enter your email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="flex-1 px-4 py-3 bg-background border border-accent/30 rounded-lg text-foreground placeholder:text-foreground/50 focus:outline-none focus:border-accent/70 transition-colors"
-              required
+              className="flex-1 px-4 py-3 bg-card border border-accent/20 rounded-lg text-foreground placeholder-foreground/50 focus:outline-none focus:border-accent/50 transition-colors"
             />
-            <Button className="bg-accent hover:bg-accent/90 text-background font-semibold whitespace-nowrap">
+            <Button className="bg-accent hover:bg-accent/90 text-background font-semibold px-8">
               <Mail size={18} className="mr-2" />
               Subscribe
             </Button>
@@ -375,7 +525,7 @@ export default function Home() {
               <h4 className="font-semibold mb-4">Quick Links</h4>
               <ul className="space-y-2 text-sm text-foreground/60">
                 <li><a href="#" className="hover:text-accent transition-colors">About Us</a></li>
-                <li><a href="#" className="hover:text-accent transition-colors">Programs</a></li>
+                <li><a href="#programs" className="hover:text-accent transition-colors">Programs</a></li>
                 <li><a href="#" className="hover:text-accent transition-colors">Schedule</a></li>
               </ul>
             </div>
@@ -384,21 +534,21 @@ export default function Home() {
               <ul className="space-y-2 text-sm text-foreground/60">
                 <li>📍 123 Court Lane, City, ST</li>
                 <li>📞 (555) 123-4567</li>
-                <li>✉️ info@pickleballclub.com</li>
+                <li>📧 info@pickleballclub.com</li>
               </ul>
             </div>
             <div>
               <h4 className="font-semibold mb-4">Follow Us</h4>
               <div className="flex gap-4">
-                <a href="#" className="text-accent hover:text-accent/70 transition-colors">Facebook</a>
-                <a href="#" className="text-accent hover:text-accent/70 transition-colors">Instagram</a>
-                <a href="#" className="text-accent hover:text-accent/70 transition-colors">Twitter</a>
+                <a href="#" className="text-accent hover:text-accent/80 transition-colors">Facebook</a>
+                <a href="#" className="text-accent hover:text-accent/80 transition-colors">Instagram</a>
+                <a href="#" className="text-accent hover:text-accent/80 transition-colors">Twitter</a>
               </div>
             </div>
           </div>
 
           <div className="border-t border-accent/20 pt-8 text-center text-sm text-foreground/60">
-            <p>&copy; 2026 Pickleball Club. All rights reserved.</p>
+            <p>© 2026 Pickleball Club. All rights reserved.</p>
           </div>
         </div>
       </footer>
