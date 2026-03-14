@@ -11,6 +11,7 @@ export default function Home() {
   const trainingImage = "https://d2xsxph8kpxj0f.cloudfront.net/310519663438044642/GEwFLYvqwVqyzSVFw4kpxn/training-group-ANKbzFKkV544eifx5aTa5c.webp";
   const courtsImage = "https://d2xsxph8kpxj0f.cloudfront.net/310519663438044642/GEwFLYvqwVqyzSVFw4kpxn/courts-facility-meRtRuoFefbX4b3MMwqxwX.webp";
   const membershipImage = "https://d2xsxph8kpxj0f.cloudfront.net/310519663438044642/GEwFLYvqwVqyzSVFw4kpxn/membership-benefits-T3Cv425F5hBuUqfMQbhWVD.webp";
+  const logoUrl = "https://d2xsxph8kpxj0f.cloudfront.net/310519663438044642/GEwFLYvqwVqyzSVFw4kpxn/lagi-logo_9f20cfc9.jpg";
 
   return (
     <div className="min-h-screen bg-background text-foreground overflow-hidden">
@@ -23,6 +24,11 @@ export default function Home() {
             className="w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-background via-background/70 to-transparent" />
+        </div>
+
+        {/* Logo watermark in hero */}
+        <div className="absolute top-32 right-0 z-5 opacity-10 pointer-events-none">
+          <img src={logoUrl} alt="" className="h-96 w-auto" />
         </div>
 
         <div className="container relative z-10 py-20">
@@ -358,9 +364,11 @@ export default function Home() {
         <div className="container">
           <div className="grid md:grid-cols-4 gap-8 mb-8">
             <div>
-              <h3 className="font-bold text-lg mb-4">Pickleball Club</h3>
+              <div className="flex items-center gap-2 mb-4">
+                <img src={logoUrl} alt="Lagi Logo" className="h-16 w-auto" />
+              </div>
               <p className="text-sm text-foreground/60">
-                Your premier destination for pickleball excellence.
+                Lagi Pickleball Social Club - Your premier destination for pickleball excellence and community.
               </p>
             </div>
             <div>

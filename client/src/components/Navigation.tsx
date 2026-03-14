@@ -25,15 +25,15 @@ export default function Navigation() {
     }
   };
 
+  const logoUrl = "https://d2xsxph8kpxj0f.cloudfront.net/310519663438044642/GEwFLYvqwVqyzSVFw4kpxn/lagi-logo_9f20cfc9.jpg";
+
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-md border-b border-accent/20">
       <div className="container flex items-center justify-between h-16">
         {/* Logo */}
-        <div className="flex items-center gap-2">
-          <div className="w-10 h-10 bg-gradient-to-br from-accent to-accent/60 rounded-lg flex items-center justify-center">
-            <span className="text-foreground font-bold text-lg">PB</span>
-          </div>
-          <span className="font-bold text-lg text-foreground hidden sm:inline">Pickleball Club</span>
+        <div className="flex items-center gap-3">
+          <img src={logoUrl} alt="Lagi Pickleball Social Club" className="h-14 w-auto" />
+          <span className="font-bold text-lg text-foreground hidden sm:inline">Lagi</span>
         </div>
 
         {/* Desktop Navigation */}
